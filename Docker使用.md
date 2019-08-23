@@ -1,4 +1,4 @@
-### 安装`docker`环境
+### 安装docker环境
 `docker`类似虚拟机, 使用`docker`开启一个`image`镜像就类似使用虚拟机开启一个系统, 这个系统运行在`docker`容器内.<br>
 
 ### 下载与打包镜像
@@ -12,6 +12,10 @@
 ### 启动一个容器
 `docker run --runtime=nvidia -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
 启动一个后台容器, 返回`container`容器`id`<br>
+`docker ps`<br>
+查看所有正在后台运行的容器<br>
+`docker exec -it container_id /bin/bash`<br>
+根据容器id进入一个容器<br>
 1. `run` 指令是`docker`启动一个容器的命令
 2. `--runtime=nvidia` 让容器支持调用本机`GPU`资源而不必在意容器内`cuda`版本等
 3. `-i` 以交互模式运行
@@ -21,14 +25,10 @@
 7. `-v` 绑定挂载地址. `:`前面是本机挂载地址, `:`后面是容器内挂载地址
 8. `repository:tag` 启动`docker`容器需要指定一个`image`镜像
 9. `/bin/bash` 指定`shell`解释器
-`docker ps`<br>
-查看所有正在后台运行的容器<br>
-`docker exec -it container_id /bin/bash`<br>
-根据容器id进入一个容器<br>
 
 ### 退出容器
-1. 在容器内`exit`, 如果是一个后台运行的容器, 则退出后容器`status`状态依然是`up`即挂起状态(**对此容器的任何更改依然保存**)<br>
-2. 在容器内`exit`, 如果不是一个后台容器, 则退出后容器`status`状态是`exited`即退出状态(**对此容器的任何更改依然保存**)<br>
+1. 在容器内`exit`, 如果是一个后台运行的容器, 则退出后容器`status`状态依然是`up`即挂起状态(*对此容器的任何更改依然保存*)<br>
+2. 在容器内`exit`, 如果不是一个后台容器, 则退出后容器`status`状态是`exited`即退出状态(*对此容器的任何更改依然保存*)<br>
 
 ### 启动一个退出的容器或关闭一个挂起的容器
 1. `docker container start container_id`
@@ -39,7 +39,7 @@
 ### 删除容器与镜像
 1. `docker rm container_id`
 根据容器`id`删除一个容器<br>
-**注意此操作后在此容器内的任何更改将不再存在**<br>
+*注意此操作后在此容器内的任何更改将不再存在*<br>
 2. `docker rmi image_id`
 根据镜像`id`删除一个镜像<br>
 
