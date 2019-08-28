@@ -58,6 +58,9 @@
 `git branch -d dev`<br>
 7. 删除远程仓库分支<br>
 `git push origin --delete dev`<br>
+8. 合并本地分支<br>
+`git merge dev`
+先进入另一个分支, 如`master`分支, 然后合并`dev`分支到`master`分支<br>
 
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
