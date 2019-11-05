@@ -1,11 +1,11 @@
 ### RandomAccessIterator vs BidirectionalIterator
-`RandomAccessIterator`与`BidirectionalIterator`的一个显著区别是, 迭代器+n, 前者时间复杂度O(1), 后者时间复杂度O(n), 即后则不支持随机访问<br>
+`RandomAccessIterator`与`BidirectionalIterator`的一个显著区别是, 迭代器`+n`, 前者时间复杂度`O(1)`, 后者时间复杂度`O(n)`, 即后则不支持随机访问<br>
 https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-sequential-access<br>
 
 ### stl rb-tree
 1. 实现技巧(stl源码剖析 p222):<br>
-![](img/1.png)
-`header`节点指向rb-tree的root节点, 为红色, 且header与root互为对方的父节点<br>
+![](/img/1.png)
+`header`节点指向`rb-tree`的`root`节点, 为红色, 且`header`与`root`互为对方的父节点<br>
 
 2. `tree.begin()`返回最小节点(一直往左节点走)<br>
 
