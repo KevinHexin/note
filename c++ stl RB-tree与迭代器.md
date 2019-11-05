@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-seque
 
 ### stl rb-tree
 1. 实现技巧(stl源码剖析 p222):<br>
-![](/img/1.png)
+![](./img/1.png)
 `header`节点指向`rb-tree`的`root`节点, 为红色, 且`header`与`root`互为对方的父节点<br>
 
 2. `tree.begin()`返回最小节点(一直往左节点走)<br>
