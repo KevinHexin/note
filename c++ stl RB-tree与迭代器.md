@@ -15,7 +15,7 @@ https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-seque
 1. 迭代器是`BidirectionalIterator`(不支持`std::sort()`, `sort()`只支持`RandomAccessIterator`, 而且`rb-tree`本身就是排序的, 不需要`std::sort()`)<br>
 
 2. `iterator++/++iterator`的实现(stl源码剖析 p216):<br>
-![](img/https://github.com/KevinHexin/note/blob/master/img/2.png)
+![image](https://github.com/KevinHexin/note/blob/master/img/2.png)
 即二叉排序树的中序遍历(先访问左节点, 再访问右节点, 从小到大输出)<br>
 ```cpp
 treeIter(Tree* node)
