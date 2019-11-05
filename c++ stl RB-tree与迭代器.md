@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-seque
 
 ### stl rb-tree
 1. 实现技巧(stl源码剖析 p222):<br>
-![](https://github.com/KevinHexin/note/blob/master/img/1.png)
+![image](https://github.com/KevinHexin/note/blob/master/img/1.png)
 `header`节点指向`rb-tree`的`root`节点, 为红色, 且`header`与`root`互为对方的父节点<br>
 
 2. `tree.begin()`返回最小节点(一直往左节点走)<br>
@@ -30,7 +30,7 @@ treeIter(Tree* node)
 ```
 
 3. `iterator--/--iterator`的实现(stl源码剖析 p216):<br>
-![](https://github.com/KevinHexin/note/blob/master/img/3.png)
+![image](https://github.com/KevinHexin/note/blob/master/img/3.png)
 即二叉排序树的中序遍历(先访问右节点, 再访问左节点, 从大到小输出)<br>
 ```cpp
 treeIter(Tree* node)
