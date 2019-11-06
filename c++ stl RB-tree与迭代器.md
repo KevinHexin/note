@@ -3,8 +3,11 @@
 https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-sequential-access<br>
 
 ### stl rb-tree
-1. 实现技巧(stl源码剖析 p222):<br>
+1. 实现技巧<br>
+#### <<<stl源码剖析>>> p222
+
 <img src="img/1.png" height="250" />
+
 `header`节点指向`rb-tree`的`root`节点, 为红色, 且`header`与`root`互为对方的父节点<br>
 
 2. `tree.begin()`返回最小节点(一直往左节点走)<br>
@@ -14,8 +17,11 @@ https://stackoverflow.com/questions/24147609/stl-what-is-random-access-and-seque
 ### stl rb-tree迭代器
 1. 迭代器是`BidirectionalIterator`(不支持`std::sort()`, `sort()`只支持`RandomAccessIterator`, 而且`rb-tree`本身就是排序的, 不需要`std::sort()`)<br>
 
-2. `iterator++/++iterator`的实现(stl源码剖析 p216):<br>
+2. `iterator++/++iterator`的实现<br>
+#### <<<stl源码剖析>>> p216
+
 <img src="img/2.png" height="250" />
+
 即二叉排序树的中序遍历(先访问左节点, 再访问右节点, 从小到大输出)<br>
 ```cpp
 treeIter(Tree* node)
@@ -29,8 +35,11 @@ treeIter(Tree* node)
 }
 ```
 
-3. `iterator--/--iterator`的实现(stl源码剖析 p216):<br>
+3. `iterator--/--iterator`的实现<br>
+#### <<<stl源码剖析>>> p216
+
 <img src="img/3.png" height="250" />
+
 即二叉排序树的中序遍历(先访问右节点, 再访问左节点, 从大到小输出)<br>
 ```cpp
 treeIter(Tree* node)
