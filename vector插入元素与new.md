@@ -1,4 +1,4 @@
-### new运算符与::operator new
+### 一 new运算符与::operator new
 
 ref:<br>
 https://www.cnblogs.com/raichen/p/5808766.html<br>
@@ -24,13 +24,13 @@ Base* obj = temp;    // 3. 返回对象指针
 因为第1步已经分配了内存, 为了只调用类的构造函数, 我们不能写下`new Base;`或则类似第1步的语句, 因为这样又会重新分配内存<br>
 
 
-### 类的产生与消亡
+### 二 类的产生与消亡
 
 1. 产生, 先分配空间, 再调用类的构造函数(`non-trival`)<br>
 
 2. 消亡, 先调用类的析构函数(`non-trival`), 再回收空间<br>
 
-### c++11 ::operator new
+### 三 c++11 ::operator new
 
 ref:
 http://www.cplusplus.com/reference/new/operator%20new/<br>
@@ -83,7 +83,7 @@ int main () {
 }
 ```
 
-### c++11 ::operator delete
+### 四 c++11 ::operator delete
 
 ref:<br>
 http://www.cplusplus.com/reference/new/operator%20delete/<br>
@@ -93,14 +93,14 @@ http://www.cplusplus.com/reference/new/operator%20delete/<br>
 2. 如果只想释放掉内存, 而不调用`MyClass`的析构函数, 则`delete((void*)MyClass)`, 即将类对象转换为`void*`类型, `g++`编译器会产生警告, 但是可以运行<br>
 
 
-### 自定义类重载::operator new
+### 五 自定义类重载::operator new
 
 注意是重载`::operator new`函数, 而不是`new`运算符, 同样重载`::operator+ ::operator=`等都不是重载`+ =`运算符, 而是重载函数<br>
 
 当类内重载了`::operator new`函数, 写下`Base* obj = new Base;`时, 第1步将调用类内的重载`new`版本, 而不再调用全局`::operator new`版本<br>
 
 
-### std::vector::push_back()方法
+### 六 std::vector::push_back()方法
 
 1. 如果插入一个左值对象<br>
 
@@ -141,7 +141,7 @@ vec.push_back(Base());
 如果类没有实现移动拷贝构造函数呢? 则必须将拷贝构造的参数写成`const Base&`类型, 因为`const`引用可以接收左右值<br>
 
 
-### 移动构造与拷贝构造
+### 七 移动构造与拷贝构造
 1. `std::vector::push_back()`方法插入左值与右值最终实现的方法都是一样的, 只是会分别去调用类的左右值不同版本的构造方法<br>
 
 2. 为何经常看到移动构造函数比拷贝构造函数快的说法:<br>
