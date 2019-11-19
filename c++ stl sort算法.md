@@ -1,8 +1,8 @@
 ### sort()如何实现
 #### <<<stl源码剖析>>> p397:<br>
 
-<img src="img/4.png" height="250" />
-<img src="img/5.png" height="250" />
+<img src="img/4.png" />
+<img src="img/5.png" />
 
 1. 如果待排序元素小于一个预设值(16), 则调用`insert_sort()`<br>
 
@@ -20,7 +20,7 @@
 ### sort()实现快排的技巧与复杂度
 #### <<<stl源码剖析>>> p393:<br>
 
-<img src="img/6.png" height="250" />
+<img src="img/6.png" />
 
 1. `quick_sort()`平均时间复杂度`O(nlogn)`, 最坏时间复杂度`O(n^2)`, 平均空间复杂度`O(logn)`<br>
 
