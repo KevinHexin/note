@@ -18,7 +18,7 @@ https://github.com/NVIDIA/nvidia-docker<br>
 ### 启动一个容器
 A. docker版本 < 19.03, 键入--runtime=nvidia以支持nvidia GPU<br>
 `docker run --runtime=nvidia -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
-b. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
+B. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
 `docker run --gpus all -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
 启动一个后台容器, 返回`container`容器`id`<br>
 `docker ps`<br>
