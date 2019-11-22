@@ -1,6 +1,12 @@
 ### 安装docker环境
 `docker`类似虚拟机, 使用`docker`开启一个`image`镜像就类似使用虚拟机开启一个系统, 这个系统运行在`docker`容器内.<br>
 
+>ref:<br>
+安装docker:<br>
+https://docs.docker.com/install/linux/docker-ce/ubuntu/<br>
+支持NVIDIA GPU:<br>
+https://github.com/NVIDIA/nvidia-docker<br>
+
 ### 下载与打包镜像
 1. `docker pull repository:tag`
 根据`repository`与`tag`下载远程仓库的镜像(如`docker hub`)<br>
@@ -10,7 +16,10 @@
 重新加载打包的本地镜像<br>
 
 ### 启动一个容器
+A. docker版本 < 19.03, 键入--runtime=nvidia以支持nvidia GPU<br>
 `docker run --runtime=nvidia -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
+b. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
+`docker run --gpus all -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
 启动一个后台容器, 返回`container`容器`id`<br>
 `docker ps`<br>
 查看所有正在后台运行的容器<br>
