@@ -19,6 +19,6 @@ https://github.com/NVIDIA/TensorRT/tree/master/samples/opensource/sampleINT8<br>
 GTX 1080Ti<br>
 
 输入 | 精度 | 耗时(ms) | 模型大小 | 效果
--|-|-|-|-|-
+:-:|:-:|:-:|:-:|:-:
 313x513 | FP32 | ~32ms | 96M | 基准 |
 313x513 | INT8 | ~17ms | 23M | -1% |
