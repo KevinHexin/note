@@ -72,5 +72,5 @@
 7. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计
 7. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
 
-### 参考
+>ref<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
