@@ -21,8 +21,15 @@
 4. 可见，使用行号设置断点是更方便的做法<br>
 
 ### 执行
-1. run 运行程序<br>
-如果是`attatch`的方式run, 则会重新启动程序<br>
+1. `gdb attach pid`的方式进入已经运行的进程
+A. `continue` 继续运行
+B. `run` 重新启动程序
+
+2. `gdb program`的方式
+会先加载符号表，然后run开始启动程序
 
 ### next/step/print等更多用法，参见
 `/word/gdb-tutorial-handout.pdf`<br>
+
+### GDB break无法触发的情况
+1. 开启了子线程，但是主线程没有调用thread.join()或while(1)操作, 导致主线程退出，此时可能无法触发断点<br>
