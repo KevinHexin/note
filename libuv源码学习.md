@@ -1,6 +1,6 @@
 ### epoll_wait()中的timeout值的设置
 1. linux系统调用`epoll_wait()`函数中，通过设置`timeout`值以控制函数返回的时机(0:立即返回，>0:延时一段时间后返回，-1:一直阻塞，直到有事件触发)<br>
-一般系统设计如下：<br>
+一般系统设计如下(注意，针对单线程)：<br>
 ```cpp
 while(1)
 {
@@ -36,7 +36,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout)
 ```
 可以看到`timeout`设置到了`epoll_wait()`函数<br>
 
-1. 设置`uv_idle`后, 我们知道`uv_loop`会不停的返回, 查看源码中`uv_run::uv_backend_timeout()`函数(返回值为`timeout`值):<br>
+2. 设置`uv_idle`后, 我们知道`uv_loop`会不停的返回, 查看源码中`uv_run::uv_backend_timeout()`函数(返回值为`timeout`值):<br>
 ```cpp
 int uv_backend_timeout(const uv_loop_t* loop)
 {
@@ -56,7 +56,7 @@ int uv_backend_timeout(const uv_loop_t* loop)
 ```
 `if(!QUEUE_EMPTY(&loop->idle_handles))`会返回`true`, 则`timeout=0`<br>
 
-2. 如果没有设置`uv_idle`(函数中其它if语句也不会触发返回0)，则查看源码`uv_run::uv_backend_timeout::uv__next_timeout()`函数：<br>
+3. 如果没有设置`uv_idle`(函数中其它if语句也不会触发返回0)，则查看源码`uv_run::uv_backend_timeout::uv__next_timeout()`函数：<br>
 ```cpp
 int uv__next_timeout(const uv_loop_t* loop)
 {
