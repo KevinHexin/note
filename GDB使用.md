@@ -32,4 +32,8 @@ B. `run` 重新启动程序<br>
 `/word/gdb-tutorial-handout.pdf`<br>
 
 ### GDB break无法触发的情况
-1. 开启了子线程，但是主线程没有调用thread.join()或while(1)操作, 导致主线程退出，此时可能无法触发断点<br>
+1. 未开启-g选项<br>
+
+2. 开启了子线程，但是主线程没有调用thread.join()或while(1)操作, 导致主线程退出，此时可能无法触发断点<br>
+
+3. 给动态库打断点的时候，gdb program / gdb attach pid 没有在动态库所在文件夹执行，而是在其他文件夹执行gdb命令<br>
