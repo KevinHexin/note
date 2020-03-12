@@ -26,16 +26,16 @@ https://blog.csdn.net/m0_37542524/article/details/94330715<br>
 1. `docker`内使用需要在启动`docker`时添加`--privileged`选项<br>
 
 2. `perf record`默认会记录`cycles:ppp`事件, 这里常用的命令:<br>
-A. `perf record -p pid -e cycles:u -g --sleep n`<br>
-`-p` 指定进程ID<br>
-`-e` 指定监控事件<br>
-`u userspace`<br>
-`k kernel`<br>
-`--sleep` 指定监控时间<br>
-`-g` 启用堆栈跟踪<br>
+    A. `perf record -p pid -e cycles:u -g --sleep n`<br>
+        `-p` 指定进程ID<br>
+        `-e` 指定监控事件<br>
+        `u userspace`<br>
+        `k kernel`<br>
+        `--sleep` 指定监控时间<br>
+        `-g` 启用堆栈跟踪<br>
 
-B. `perf record -e cycles:u -a -g --sleep n`<br>
-`-a` 记录整个系统的程序(这里没有`-p`)<br>
+    B. `perf record -e cycles:u -a -g --sleep n`<br>
+        `-a` 记录整个系统的程序(这里没有`-p`)<br>
 
 ### 使用perf report
 1. 当被监控的程序运行完或用户按下`ctrl+c`或`record`时间结束, `perf`工具会在当前目录生成`perf.data`的文件<br>
@@ -48,7 +48,7 @@ B. `perf record -e cycles:u -a -g --sleep n`<br>
 <img src="img/41.png" />
 
 其中:<br>
-`overhead` 表明排序等级<br>
+`children/overhead` 表明排序等级<br>
 `shared object` 表明动态库<br>
 `symbol` 符号(未包含调试符号表时, 可能只能显示一个地址)<br>
 `[.]` 表示用户空间程序<br>
