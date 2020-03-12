@@ -28,6 +28,11 @@ B. `run` 重新启动程序<br>
 2. `gdb program`的方式<br>
 会先加载符号表，然后run开始启动程序<br>
 
+3. `set scheduler-locking off|on|step`, 在使用`step`或者`continue`命令调试当前被调试线程的时候，其他线程也是同时执行的，怎么只让被调试程序执行呢？通过这个命令就可以实现这个需求:<br>
+A. `off`不锁定任何线程，也就是所有线程都执行，这是默认值<br>
+B. `on`只有当前被调试程序会执行<br>
+C. `step`在单步的时候，除了`next`过一个函数的情况(熟悉情况的人可能知道，这其实是一个设置断点然后`continue`的行为)以外，只有当前线程会执行<br>
+
 ### next/step/print等更多用法，参见
 `/word/gdb-tutorial-handout.pdf`<br>
 
