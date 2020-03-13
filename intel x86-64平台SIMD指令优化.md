@@ -26,15 +26,15 @@
 
 粘贴为文本如下(为了方便描述, 添加了行号):<br>
 ```cpp
-1. +   14.24%     0.00%  mytest   libstdc++.so.6.0.21              [.] 0x00000000000b8c80
-2. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::thread::_Impl<std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)> >::_M_run
-3. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)>::operator()
-4. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)>::_M_invoke<0ul>
-5. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Mem_fn_base<void (FD::PoseWrapper::*)(), true>::operator()<, void>
-6. +   13.40%     0.00%  mytest   libFightDetect.so                [.] FD::PoseWrapper::CPULoopFunc
-7. +   13.37%     0.00%  mytest   libFightDetect.so                [.] FD::MiniPifPaf::postProcess
-8. +   12.19%     0.00%  mytest   libFightDetect.so                [.] FD::MiniPifPaf::annotationSingleScale
-9. +   12.19%     0.00%  mytest   libFightDetect.so                [.] PifPafDecoder::callPifPafDecoder
+01. +   14.24%     0.00%  mytest   libstdc++.so.6.0.21              [.] 0x00000000000b8c80
+02. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::thread::_Impl<std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)> >::_M_run
+03. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)>::operator()
+04. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Bind_simple<std::_Mem_fn<void (FD::PoseWrapper::*)()> (FD::PoseWrapper*)>::_M_invoke<0ul>
+05. +   13.40%     0.00%  mytest   libFightDetect.so                [.] std::_Mem_fn_base<void (FD::PoseWrapper::*)(), true>::operator()<, void>
+06. +   13.40%     0.00%  mytest   libFightDetect.so                [.] FD::PoseWrapper::CPULoopFunc
+07. +   13.37%     0.00%  mytest   libFightDetect.so                [.] FD::MiniPifPaf::postProcess
+08. +   12.19%     0.00%  mytest   libFightDetect.so                [.] FD::MiniPifPaf::annotationSingleScale
+09. +   12.19%     0.00%  mytest   libFightDetect.so                [.] PifPafDecoder::callPifPafDecoder
 10. +   11.86%     0.00%  mytest   [unknown]                        [.] 0x000000000096d630
 11. +   10.33%     0.01%  mytest   libFightDetect.so                [.] PifPafInitial::callPifPafInitial
 12. +    7.79%     0.00%  mytest   [unknown]                        [.] 0000000000000000
@@ -65,7 +65,7 @@
 + `libFightDetect.so`即为封装的整个深度学习工程的动态库, `mytest`是测试用例, 最后一列内容即为函数名(没有符号表信息的显示16进制指令地址)<br>
 + 看第1 2 3 4 5行的函数名, 都是与函数指针相关的封装, 跳过<br>
 
-+ 看第6行, 分析源码, 此函数是后处理逻辑的入口函数, 在`perf report`交互窗口展开此函数调用栈:<br>
++ 看第6行, 在此工程中, 此函数是`后处理逻辑的入口函数`, 在`perf report`交互窗口展开此函数调用栈:<br>
 <img src="img/47.png" />
 
 ```cpp
@@ -102,7 +102,7 @@
 16.                + 1.83% PifPafDecoder::annotation
 17.            1.17% FD::MiniPifPaf::softNMS
 ```
-+ 其中, `PifPafInitial::normalizePaf()`和`__memcpy_avx_unaligned()`和`__memset_avx2()`和`PifPafInitial::scorePafTarget()`函数都大概占用了`0.68%`到`1.03%`的CPU采样点, 这可能是值得优化的函数(注意, 很显然`__memcpy_avx_unaligned()`和`__memset_avx2()`两个函数是系统函数)<br>
++ 其中, `PifPafInitial::normalizePaf()`、`__memcpy_avx_unaligned()`、`__memset_avx2()`和`PifPafInitial::scorePafTarget()`函数大概占用了`0.68%`到`1.03%`的CPU采样点, 这可能是值得优化的函数(注意, 很显然`__memcpy_avx_unaligned()`和`__memset_avx2()`两个函数是系统库函数)<br>
 
 + 当然, 我们最应该关注的应该是`PifPafInitial::scalarSquareAddGauss()`函数, 此函数占用了`4.20%`的CPU采样点, 如果观察最开始的`report`表, 第16行也列出了同样的CPU采样点占用率<br>
 
@@ -125,21 +125,21 @@
 https://software.intel.com/sites/landingpage/IntrinsicsGuide/<br>
 
 #### 1. 查看 /proc/cpuinfo 是否支持AVX2指令集
-+ 支持AVX指令集的CPU, 内部含有16个256bit的YMM寄存器<br>
++ 支持`AVX`指令集的CPU, 内部含有16个`256bit`的`YMM`寄存器<br>
 
 #### 2. 编译注意点
 + cmakelists添加:<br>
 ```cpp
 set(CMAKE_CXX_FLAGS "-std=c++11 -mavx -mfma")
 ```
-+ 使用`-g`编译时, `_mm256_store_ps()`函数要求目的内存地址进行过32bit对齐<br>
++ 使用`-g`编译时, `_mm256_store_ps()`函数要求目的内存地址进行过`32bit`对齐<br>
 >参考:<br>
 https://www.sciencedirect.com/topics/computer-science/alignment-requirement<br>
 
 使用`-O2`等优化编译时, 似乎自动进行了内存地址对齐, 若要申请进行过地址对齐的内存空间, 使用`posix_memalign()`函数<br>
 
 #### 3. Intrinsics instructions(内联指令, 这里只列出一些注意点)
-+ `_mm256_set_ps()`加载数据到YMM寄存器, `s`表示单精度浮点, 需要主要的是加载数据的时候, 括号`()`内的数据从左往右依次对应YMM寄存器的高位到低位<br>
++ `_mm256_set_ps()`加载数据到`YMM`寄存器, `s`表示单精度浮点, 需要主要的是加载数据的时候, 括号`()`内的数据从左往右依次对应`YMM`寄存器的高位到低位<br>
 + 比较逻辑:<br>
 ```cpp
 if((x > 2.f) || (x < -2.f))
@@ -157,7 +157,7 @@ tmp1 = _mm256_cmp_ps(dx, dn_2_0, _CMP_GT_OS);   // x < -2.f ?
 tmp2 = _mm256_and_ps(tmp0, tmp1);               // (x > 2.f) || (x < -2.f) ?
 res = _mm256_and_ps(dx, tmp2);                  // 使用此res代表比较过大小x
 ```
-+ 因为YMM寄存器是256bit的, 因此循环可以这么写最大化利用SIMD寄存器(指令):
++ 因为`YMM`寄存器是`256bit`的, 因此循环可以这么写最大化利用`SIMD`寄存器(指令):
 ```cpp
 int yy = 0;
 for(yy=miny; yy+7<maxy; yy+=8)
