@@ -42,7 +42,7 @@ https://blog.csdn.net/m0_37542524/article/details/94330715<br>
 
 2. `perf.data`只包含原始数据，`perf report`需要访问本地的符号表<br>
 
-3. 使用perf diff 比较两次perf.data的区别
+3. 使用`perf diff`比较两次`perf.data`的区别
 
 4. `perf report`打开一个交互窗口, 加载`perf.data`文件:
 <img src="img/41.png" />
