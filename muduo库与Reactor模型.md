@@ -80,6 +80,7 @@ void TcpServer::start()
 
 C. `loop.loop()`启动`EventLoop`(`mainReactor`事件循环), 具体在后面进行分析<br>
 
+
 2. `threadPool_->start()`函数<br>
 
 A. 跟踪`threadPool_->start()`函数：<br>
@@ -581,6 +582,7 @@ void makeSpace(size_t len)
 
 可以看到, 用户写入数据时, 如果此时`IO`繁忙, `muduo`库会将不能及时发送的数据缓存, 并向`epoll_wait`注册可写事件已发送完所有数据<br>
 
+---
 ### muduo库网络IO模型总结
 1. 整体架构同多`Reactor`线程模式(没有工作者线程池)<br>
 
