@@ -1,17 +1,19 @@
 ### 以一个计算人体关键点的深度学习例子为例, 计算情况是:
 | 计算模块 | 预处理(如图片缩放) | CNN计算 | 后处理 |
+| --- | --- | --- | --- |
 | 计算平台 | CPU | GPU | CPU|
 | 耗时占比 | ~5% | ~65% | ~30% |
 
 平台:<br>
-nvidia GTX 1050Ti 4G-RAM<br>
-intel core i5-8500@3GHz x 6<br>
-15.6G RAM<br>
+`nvidia GTX 1050Ti 4G-RAM`<br>
+`intel core i5-8500@3GHz x 6`<br>
+`15.6G RAM`<br>
 
 编译:<br>
-gcc/g++ v5.4.0<br>
--g(开启debug) or -O2<br>
+`gcc/g++ v5.4.0`<br>
+`-g(开启debug) or -O2`<br>
 
+---
 ### 确定耗时函数
 
 #### 1. 使用perf record记录耗时
@@ -104,7 +106,7 @@ gcc/g++ v5.4.0<br>
 
 + 当然, 我们最应该关注的应该是`PifPafInitial::scalarSquareAddGauss()`函数, 此函数占用了`4.20%`的CPU采样点, 如果观察最开始的`report`表, 第16行也列出了同样的CPU采样点占用率<br>
 
-
+---
 ### 分析耗时函数
 
 #### 1. 单纯分析perf结果无法定量分析, 这里可以通过记录目标函数占用的时间来进一步分析
@@ -117,6 +119,7 @@ gcc/g++ v5.4.0<br>
 + 使用GPU平台计算<br>
 + 使用CPU支持的SIMD指令计算<br>
 
+---
 ### 使用AVX2指令集优化耗时函数
 >参考:<br>
 https://software.intel.com/sites/landingpage/IntrinsicsGuide/<br>
@@ -171,7 +174,13 @@ for(yy; yy<maxy; yy++)
 }
 ```
 
+---
 ### 结果
 |  | AVX2优化前耗时 | AVX2优化后耗时 |
+| --- | --- | --- |
 | -g | ~4.7ms | ~3.8ms |
 | -O2 | ~2.0ms | ~1.4ms |
+
+---
+### 其它
+在前面分析`perf`结果时, 发现耗时的主要部分`GPU`计算没有在结果中显示出来, `perf`似乎没法很好的记录异构计算的真实情况
