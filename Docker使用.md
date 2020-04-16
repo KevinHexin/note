@@ -7,6 +7,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/<br>
 支持NVIDIA GPU:<br>
 https://github.com/NVIDIA/nvidia-docker<br>
 
+---
 ### 下载与打包镜像
 1. `docker pull repository:tag`
 根据`repository`与`tag`下载远程仓库的镜像(如`docker hub`)<br>
@@ -15,10 +16,11 @@ https://github.com/NVIDIA/nvidia-docker<br>
 3. `docker load --input /your_path/docker_image.tar`
 重新加载打包的本地镜像<br>
 
+---
 ### 启动一个容器
-A. docker版本 < 19.03, 键入--runtime=nvidia以支持nvidia GPU<br>
+A. `docker版本 < 19.03`, 键入`--runtime=nvidia`以支持`nvidia GPU`<br>
 `docker run --runtime=nvidia -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
-B. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
+B. `docker版本 >= 19.03`, 键入`--gpus all`以支持`nvidia GPU`<br>
 `docker run --gpus all -itd --name xxx -v /local_path/:/mount_path/ repository:tag /bin/bash`<br>
 启动一个后台容器, 返回`container`容器`id`<br>
 `docker ps`<br>
@@ -34,17 +36,23 @@ B. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
 7. `-v` 绑定挂载地址. `:`前面是本机挂载地址, `:`后面是容器内挂载地址
 8. `repository:tag` 启动`docker`容器需要指定一个`image`镜像
 9. `/bin/bash` 指定`shell`解释器
+10. `--rm` `exit`后删除容器(不与`-d`共用)
+11. `--privileged ` 给予更多的权限(例如使用perf或则生成core)，但是慎用
 
+---
 ### 退出容器
 1. 在容器内`exit`, 如果是一个后台运行的容器, 则退出后容器`status`状态依然是`up`即挂起状态(*对此容器的任何更改依然保存*)<br>
 2. 在容器内`exit`, 如果不是一个后台容器, 则退出后容器`status`状态是`exited`即退出状态(*对此容器的任何更改依然保存*)<br>
+3. 保存对容器的修改: `docker commit container_id your_image_name`, 这样会保存对容器的修改, 并生成一个`your_image_name`名字的镜像
 
+---
 ### 启动一个退出的容器或关闭一个挂起的容器
 1. `docker container start container_id`
 根据容器`id`启动`status`为`exited`的容器为`up`状态
 2. `docker container stop container_id`
 根据容器`id`关闭`status`为`up`的容器为`exited`状态
 
+---
 ### 删除容器与镜像
 1. `docker rm container_id`
 根据容器`id`删除一个容器<br>
@@ -52,6 +60,7 @@ B. docker版本 >= 19.03, 键入--gpus all以支持nvidia GPU<br>
 2. `docker rmi image_id`
 根据镜像`id`删除一个镜像<br>
 
+---
 ### 其他
 1. `docker images`
 查看所有镜像<br>
