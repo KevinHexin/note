@@ -33,6 +33,15 @@ A. `off`不锁定任何线程，也就是所有线程都执行，这是默认值
 B. `on`只有当前被调试程序会执行<br>
 C. `step`在单步的时候，除了`next`过一个函数的情况(熟悉情况的人可能知道，这其实是一个设置断点然后`continue`的行为)以外，只有当前线程会执行<br>
 
+### 打印变量print
+1. `print variable`或简写`p variable`将直接打印变量`variable`内存储的值<br>
+
+2. 如果出现`No symbol "variable" in current context`:<br>
+A. 编译时是否加入`-g`选项<br>
+B. `variable`变量是否在当前栈帧中, 如果不是, 执行`up 1`向上跳到正确的栈帧处<br>
+参考:<br>
+https://blog.csdn.net/sj_djw/article/details/91958035<br>
+
 ### next/step/print等更多用法，参见
 `/word/gdb-tutorial-handout.pdf`<br>
 
