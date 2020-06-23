@@ -73,6 +73,8 @@
 8. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
 9. 当`gitignore`不起作用时, 需要删除`vscode`自动添加到暂存区的缓存, 键入`git rm -r --cached dir`即可
 10. `git config -l`查看自己配置的用户名和邮箱
+11. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
+12. `git push origin tag_name` 提交`tag`
 
 >ref<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>

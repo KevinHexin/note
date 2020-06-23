@@ -17,8 +17,14 @@
 3. 如果是行号，需要<br>
 `break file.cpp:30` 给file.cpp的第30行打上断点<br>
 注意，文件名和行号之间是单冒号`":"`<br>
+可见，使用行号设置断点是更方便的做法<br>
 
-4. 可见，使用行号设置断点是更方便的做法<br>
+4. 设置触发条件<br>
+`break file:line if var >= 1` 在`file`文件`line`行处打上断点, 同时当变量`var`的值大于等于`1`时才会触发<br>
+
+5. 跳过`n`次触发, 在第`n+1`次触发断点时才进入断点<br>
+`ignore break n` 断点`break`前`n`次触发都跳过, 在`n+1`次触发断点时才进入断点<br>
+`info break` 可以查看断点`break`被触发了多少次<br>
 
 ### 执行
 1. `gdb attach pid`的方式进入已经运行的进程, 进入后，程序将被阻塞，直到:<br>
@@ -46,8 +52,8 @@ https://blog.csdn.net/sj_djw/article/details/91958035<br>
 `/word/gdb-tutorial-handout.pdf`<br>
 
 ### GDB break无法触发的情况
-1. 编译程序/动态库/静态库时未开启-g选项<br>
+1. 编译程序/动态库/静态库时未开启`-g`选项<br>
 
-2. 开启了子线程，但是主线程没有调用thread.join()或while(1)操作, 导致主线程退出，此时可能无法触发断点<br>
+2. 开启了子线程，但是主线程没有调用`thread.join()`或`while(1)`操作, 导致主线程退出，此时可能无法触发断点<br>
 
-3. 给动态库打断点的时候，gdb program / gdb attach pid 没有在动态库所在文件夹执行，而是在其他文件夹执行gdb命令<br>
+3. 给动态库打断点的时候，`gdb program` / `gdb attach pid` 没有在动态库所在文件夹执行，而是在其他文件夹执行gdb命令<br>
