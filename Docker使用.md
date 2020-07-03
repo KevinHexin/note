@@ -35,7 +35,7 @@ B. `docker版本 >= 19.03`, 键入`--gpus all`以支持`nvidia GPU`<br>
 6. `--name` 为启动的容器命名
 7. `-v` 绑定挂载地址. `:`前面是本机挂载地址, `:`后面是容器内挂载地址
 8. `repository:tag` 启动`docker`容器需要指定一个`image`镜像
-9. `/bin/bash` 指定`shell`解释器
+9. `/bin/bash` 进入容器后执行的命令, 可以替换成其他命令
 10. `--rm` `exit`后删除容器(不与`-d`共用)
 11. `--privileged ` 给予更多的权限(例如使用perf或则生成core)，但是慎用
 12. `--net=host` 让容器与主机共享同一个ip地址(慎用, 可能会造成端口冲突)

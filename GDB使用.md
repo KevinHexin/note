@@ -26,6 +26,13 @@
 `ignore break n` 断点`break`前`n`次触发都跳过, 在`n+1`次触发断点时才进入断点<br>
 `info break` 可以查看断点`break`被触发了多少次<br>
 
+### 汇编调试
+1. 先正常打一个断点, 以跳到关心的函数处<br>
+
+2. `disas func_name` 显示反汇编, 这时会看到一个双杠箭头, 指向了当前汇编指令位置<br>
+
+3. `break *0x00005621833359a2` 即在指令地址处打上断点<br>
+
 ### 执行
 1. `gdb attach pid`的方式进入已经运行的进程, 进入后，程序将被阻塞，直到:<br>
 A. `continue` 继续运行<br>
@@ -47,6 +54,8 @@ A. 编译时是否加入`-g`选项<br>
 B. `variable`变量是否在当前栈帧中, 如果不是, 执行`up 1`向上跳到正确的栈帧处<br>
 参考:<br>
 https://blog.csdn.net/sj_djw/article/details/91958035<br>
+
+3. 如果需要打印虚表指针值, `print *obj`即可打印对象指针虚表指针信息<br>
 
 ### next/step/print等更多用法，参见
 `/word/gdb-tutorial-handout.pdf`<br>
