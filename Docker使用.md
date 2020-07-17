@@ -62,6 +62,17 @@ B. `docker版本 >= 19.03`, 键入`--gpus all`以支持`nvidia GPU`<br>
 根据镜像`id`删除一个镜像<br>
 
 ---
+### 启用sshd服务
+1. `apt install openssh-server`安装ssh server端<br>
+2. `vim /etc/ssh/sshd_config`进入配置文件, 找到`PermitRootLogin`项, 添加一行`PermitRootLogin yes`, 保存退出<br>
+2. 查看`/etc/init.d/ssh`是否存在, 如果存在, 使用`/etc/init.d/ssh start`启动服务<br>
+3. 使用`ps`或`netstat`查看服务是否启动<br>
+4. 一般docker登录后默认是root用户且没有设置过密码, 这里需要使用`passwd root`给root用户设置密码<br>
+5. 在物理机使用`ssh root@127.0.2.1`登录ssh-server, 并输入刚设置的密码即可<br>
+6. 注意启用容器时是否开启`--net=host`或`-p 22:22`进行过端口映射<br>
+7. 如果在centos中`/etc/init.d/ssh`不存在, 先键入`yum install initscripts`安装`service`模块, 再重新安装`openssh-server`<br>
+
+---
 ### 其他
 1. `docker images`
 查看所有镜像<br>
