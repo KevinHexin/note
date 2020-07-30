@@ -52,15 +52,21 @@
 4. 新建并关联远程分支<br>
 `git checkout -b dev origin/dev`<br>
 在本地新建一个`dev`分支, 与远程仓库中的`dev`分支对应起来, 并切换到`dev`分支<br>
-5. 重命名本地分支<br>
+5. 拉取远程分支<br>
+`git pull origin dev`<br>
+注意, 在此之前一定要新建并关联远程分支, 然后再拉取远程分支, 切勿在已经存在的本地分支上拉取, 因为这样会合并代码<br>
+6. 重命名本地分支<br>
 `git branch -m old-branch new-branch`<br>
-6. 删除本地分支<br>
+7. 删除本地分支<br>
 `git branch -d dev`<br>
-7. 删除远程仓库分支<br>
+8. 删除远程仓库分支<br>
 `git push origin --delete dev`<br>
-8. 合并本地分支<br>
+9. 合并本地分支<br>
 `git merge dev`
 先进入另一个分支, 如`master`分支, 然后合并`dev`分支到`master`分支<br>
+10. 回滚<br>
+`git log` 查看提交记录<br>
+`git reset --hard commitid` 回滚到某个提交上去<br>
 
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
@@ -69,7 +75,9 @@
 4. `git branch -r` 查看远程仓库的分支信息和`head`, `master`指针的指向
 5. `git status` 查看当前状态
 6. `git diff origin/dev dev` 比较远程`dev`仓库和本地`dev`仓库的区别
-7. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计
+7. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计, 
+此命令可以在`push`之前查看有哪些文件将要提交, 避免提交无意义的文件
+`-2` 只查看最近两次的commit
 8. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
 9. 当`gitignore`不起作用时, 需要删除`vscode`自动添加到暂存区的缓存, 键入`git rm -r --cached dir`即可
 10. `git config -l`查看自己配置的用户名和邮箱

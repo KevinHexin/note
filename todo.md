@@ -23,7 +23,7 @@ https://blog.csdn.net/caoyan_12727/article/details/51916518
 
 11. janus refcount.h的实现
 
-12. 软硬链接的本质
+12. 软链接, 硬链接的本质和区别
 
 11. 
 ```cpp
