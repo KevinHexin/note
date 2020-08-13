@@ -25,6 +25,8 @@ https://blog.csdn.net/caoyan_12727/article/details/51916518
 
 12. 软链接, 硬链接的本质和区别
 
+13. -fPIC位置无关代码的意思
+
 11. 
 ```cpp
 1.Linux进程和线程如何创建、退出？进程退出的时候，自己没有释放的资源（如内存没有free）会怎样？

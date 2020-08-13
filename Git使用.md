@@ -67,6 +67,11 @@
 10. 回滚<br>
 `git log` 查看提交记录<br>
 `git reset --hard commitid` 回滚到某个提交上去<br>
+11. 合并分支<br>
+`git pull origin/dev` 拉取远程`dev`分支到本地`origin`存放区<br>
+`git merge origin/dev` 合并远程`dev`分支到本地当前分支<br>
+到此可以提交本地分支了<br>
+`git reset merge`回退到合并前的状态<br>
 
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
@@ -75,14 +80,18 @@
 4. `git branch -r` 查看远程仓库的分支信息和`head`, `master`指针的指向
 5. `git status` 查看当前状态
 6. `git diff origin/dev dev` 比较远程`dev`仓库和本地`dev`仓库的区别
+`git diff` 不带任何参数时, 默认列出本地当前仓库和对应远程仓库的区别<br>
+`git diff --name-only` 只列出变更文件名<br>
+`git diff --name-status` 列出变更文件状态(添加, 修改, 删除等)<br>
 7. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计, 
 此命令可以在`push`之前查看有哪些文件将要提交, 避免提交无意义的文件
-`-2` 只查看最近两次的commit
+`-2` 只查看最近两次的commit, 完整示例:
+`git log --stat -2`
 8. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
 9. 当`gitignore`不起作用时, 需要删除`vscode`自动添加到暂存区的缓存, 键入`git rm -r --cached dir`即可
 10. `git config -l`查看自己配置的用户名和邮箱
 11. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
-12. `git push origin tag_name` 提交`tag`
+12. `git push origin tag_name` 提交`tag` 
 
 >ref<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
