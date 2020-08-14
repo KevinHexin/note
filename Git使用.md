@@ -36,11 +36,7 @@
 `git push origin dev`<br>
 远程仓库名为`origin`<br>
 
-### 更新到本地
-1. 更新远程仓库的更改到本地<br>
-`git pull origin/dev dev`<br>
-
-### 分支
+### 分支管理
 1. 查看本地所有分支<br>
 `git branch`<br>
 2. 切换分支(如果本地Git库有`dev`分支)<br>
@@ -52,9 +48,8 @@
 4. 新建并关联远程分支<br>
 `git checkout -b dev origin/dev`<br>
 在本地新建一个`dev`分支, 与远程仓库中的`dev`分支对应起来, 并切换到`dev`分支<br>
-5. 拉取远程分支<br>
-`git pull origin dev`<br>
-注意, 在此之前一定要新建并关联远程分支, 然后再拉取远程分支, 切勿在已经存在的本地分支上拉取, 因为这样会合并代码<br>
+5. 新建了本地分支, 并与远程分支关联起来<br>
+`git branch --set-upstream-to=origin/dev dev`<br>
 6. 重命名本地分支<br>
 `git branch -m old-branch new-branch`<br>
 7. 删除本地分支<br>
@@ -64,14 +59,30 @@
 9. 合并本地分支<br>
 `git merge dev`
 先进入另一个分支, 如`master`分支, 然后合并`dev`分支到`master`分支<br>
-10. 回滚<br>
+
+### 协作开发
+1. 拉取远程分支<br>
+`git pull origin dev`<br>
+注意, 在此之前一定要新建并关联远程分支, 然后再拉取远程分支, 切勿在已经存在的本地分支上拉取, 因为这样会直接合并代码<br>
+2. 合并分支<br>
+`git fetch origin dev` 拉取远程`dev`分支到本地`origin`存放区<br>
+`git merge origin/dev` 合并远程`dev`分支到本地当前分支<br>
+3. 解决冲突<br>
+`git status` 查看冲突文件<br>
+`vim xxx.c` 编辑冲突文件(注意也要删除 `<<<HEAD====DEV>>>` 等信息)<br>
+`git add xxx.c` 将解决冲突后的文件添加到暂存区<br>
+解决完所有冲突文件<br>
+`git commit`<br>
+`git push origin dev`<br>
+4. `merge`回退<br>
+`git reset merge`回退到合并前的状态<br>
+<br>
+关于这一节, 可以参考:<br>
+https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6<br>
+
+### 回滚
 `git log` 查看提交记录<br>
 `git reset --hard commitid` 回滚到某个提交上去<br>
-11. 合并分支<br>
-`git pull origin/dev` 拉取远程`dev`分支到本地`origin`存放区<br>
-`git merge origin/dev` 合并远程`dev`分支到本地当前分支<br>
-到此可以提交本地分支了<br>
-`git reset merge`回退到合并前的状态<br>
 
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
@@ -97,5 +108,5 @@ https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
 11. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
 12. `git push origin tag_name` 提交`tag` 
 
->ref<br>
+><br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
