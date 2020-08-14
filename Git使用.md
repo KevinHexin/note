@@ -39,6 +39,7 @@
 ### 分支管理
 1. 查看本地所有分支<br>
 `git branch`<br>
+更多`branch`命令参看下面`其他`部分<br>
 2. 切换分支(如果本地Git库有`dev`分支)<br>
 `git checkout dev`<br>
 切换到`dev`分支<br>
@@ -88,25 +89,26 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
 2. `git remote` 查看远程仓库名(一般叫`origin`)
 3. `git branch` 查看本地分支(本地主分支一般叫`master`, 带`×`号的是当前正在操作的分支)
-4. `git branch -r` 查看远程仓库的分支信息和`head`, `master`指针的指向
-5. `git status` 查看当前状态
-6. `git diff origin/dev dev` 比较`origin-dev`仓库和本地`dev`仓库的区别
+`git branch -r` 查看远程仓库的分支信息和`head`, `master`指针的指向<br>
+`git branch -v` 查看各个本地仓库最后一次提交的`commit`信息<br>
+4. `git status` 查看当前状态
+5. `git diff origin/dev dev` 比较`origin-dev`仓库和本地`dev`仓库的区别
 `git diff` 不带任何参数时, 默认列出工作区和暂存区的区别<br>
 `git diff --name-only` 只列出变更文件名<br>
 `git diff --name-status` 列出变更文件状态(添加, 修改, 删除等)<br>
 关于`diff`和工作区等的讨论见:<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
-7. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计, 
+6. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计, 
 此命令可以在`push`之前查看有哪些文件将要提交, 避免提交无意义的文件
 `-2` 只查看最近两次的commit, 完整示例:
 `git log --stat -2`
-8. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
-9. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息
+7. 操作本地git仓库前, 最好 `sudo chmod 777 -R ./`
+8. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息
 因此我们需要删除`.vscode`在工作区的缓存, 键入`git rm -r --cached dir`即可<br>
 更好的方式是在项目创建的时候将`.vscode`添加到`.gitignore`中<br>
-10. `git config -l`查看自己配置的用户名和邮箱
-11. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
-12. `git push origin tag_name` 提交`tag` 
+9. `git config -l`查看自己配置的用户名和邮箱
+10. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
+11. `git push origin tag_name` 提交`tag` 
 
 ><br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
