@@ -67,25 +67,26 @@
 先进入另一个分支, 如`master`分支, 然后合并`dev`分支到`master`分支<br>
 
 ### 拉取远程新分支
-1. 查看本地仓库是否与远程仓库建立连接
+1. 查看本地仓库是否与远程仓库建立连接<br>
 `git remote -v`<br>
 如果正常, 会显示`fetch`和`push`的远程仓库地址<br>
 如果没有, 添加地址:<br>
 `git remote add origin xxx`<br>
 
-2. 查看本地`origin`仓库是否包含远程仓库上的目标分支
+2. 查看本地`origin`仓库是否包含远程仓库上的目标分支<br>
 `git branch -r`<br>
 
-3. 如果本地`origin`仓库没有目标分支, 拉取分支
+3. 如果本地`origin`仓库没有目标分支, 拉取分支<br>
 `git fetch origin dev`<br>
 
-4. 新建本地分支并切换到远程分支
+4. 新建本地分支并切换到远程分支<br>
 `git checkout -b dev origin/dev`<br>
 
 ### 协作开发(合并远程仓库的代码到本地)
 1. 直接合并远程分支代码到本地<br>
 `git pull origin dev`<br>
-`pull` = `fetch`+`merge`, 所以不建议用此命令来合并分支
+我们知道`pull` = `fetch`+`merge`, 且此命令会直接合并`origin`代码到当前本地分支, <br>
+所以不建议用此命令来合并分支<br>
 
 2. 合并分支<br>
 `git fetch origin dev` 拉取远程`dev`分支到本地`origin`存放区<br>
