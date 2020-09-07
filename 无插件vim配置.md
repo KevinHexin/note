@@ -10,7 +10,7 @@ set expandtab
 set softtabstop=2
 set autoindent
 
-" 按下F9后再crtl+shift+v复制文本不会打乱原有格式
+" 按下F9后再ctrl+shift+v复制文本不会打乱原有格式
 set pastetoggle=<F9>
 
 " vsplit默认新窗口在右边打开
