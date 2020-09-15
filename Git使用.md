@@ -5,11 +5,14 @@
 查看`ssh`公钥, 添加到Git远程服务器上<br>
 `cat ~/.ssh/id_rsa.pub`<br>
 
-2. 在安装Git工具后, 需要配置用户信息<br>
+2. 在安装Git工具后, 需要配置用户信息, 否则不能`git commit`<br>
 `git config --global user.name "kevin"`<br>
 `git config --global user.email "kevin@example.com"`<br>
 由于添加了`--global`选项, 那么在每次Git提交的时候都会读取该信息, 如果想针对某个项目使用不同的用户信息, 去掉`--global`选项<br>
 注意, 此信息并不是密码类的信息, 意味着可以配置任意信息<br>
+
+3. 修改`git commit`默认编辑器为`vim`<br>
+`git config –global core.editor vim`<br>
 
 ### 初始化关联一个远程仓库
 关联远程仓库的信息记录到`.git`隐藏目录下<br>
