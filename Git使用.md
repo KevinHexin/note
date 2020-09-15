@@ -12,7 +12,7 @@
 注意, 此信息并不是密码类的信息, 意味着可以配置任意信息<br>
 
 3. 修改`git commit`默认编辑器为`vim`<br>
-`git config –global core.editor vim`<br>
+`git config --global core.editor vim`<br>
 
 ### 初始化关联一个远程仓库
 关联远程仓库的信息记录到`.git`隐藏目录下<br>
