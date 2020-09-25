@@ -86,7 +86,7 @@
 `git checkout -b dev origin/dev`<br>
 
 ### 协作开发(合并远程仓库的代码到本地)
-1. 直接合并远程分支代码到本地<br>
+1. 直接合并远程分支代码到本地(`不推荐的做法`)<br>
 `git pull origin dev`<br>
 我们知道`pull` = `fetch`+`merge`, 且此命令会直接合并`origin`代码到当前本地分支, <br>
 所以不建议用此命令来合并分支<br>
@@ -115,6 +115,15 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 `git log` 查看提交记录<br>
 `git reset --hard commitid` 回滚到某个提交上去<br>
 
+### 查看提交记录
+1. `git log` 查看所有提交记录<br>
+`git log -p` 查看详细提交记录, 以`diff`方式列出<br>
+`git log -2` 查看最近两条提交记录<br>
+`git log --stat` 仅显示统计信息<br>
+
+2. `git show commit_id` 根据`git log`显示的`commit_id`来查看某次提交详细的记录, 类似`git log -p`<br>
+`git show commit_id --stat` 仅显示统计信息<br>
+
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
 
@@ -134,20 +143,15 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 关于`diff`和工作区等的讨论见:<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
 
-6. `git log` 查看提交记录  `--stat` 仅显示简要的行数统计, 
-此命令可以在`push`之前查看有哪些文件将要提交, 避免提交无意义的文件
-`-2` 只查看最近两次的commit, 完整示例:
-`git log --stat -2`
-
-7. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息
+6. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息
 因此我们需要删除`.vscode`在工作区的缓存, 键入`git rm -r --cached dir`即可<br>
 更好的方式是在项目创建的时候将`.vscode`添加到`.gitignore`中<br>
 
-8. `git config -l`查看自己配置的用户名和邮箱
+7. `git config -l`查看自己配置的用户名和邮箱
 
-9. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
+8. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
 
-10. `git push origin tag_name` 提交`tag` 
+9. `git push origin tag_name` 提交`tag` 
 
 ><br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
