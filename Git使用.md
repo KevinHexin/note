@@ -1,15 +1,18 @@
 ### 初始化
 1. 生成`ssh-key`<br>
-`ssh-keygen`<br>
+`ssh-keygen -t rsa -C "your_remarks"`<br>
 运行上述命令会确认密钥的存储位置, 默认情况下, `linux`系统ssh密钥在`~/.ssh`目录下<br>
 查看`ssh`公钥, 添加到Git远程服务器上<br>
 `cat ~/.ssh/id_rsa.pub`<br>
+`-t`选项指定了加密方式, 默认为`rsa`加密, 所以此项可选<br>
+`-C`选项指定了此key的标识, 可选<br>
 
 2. 在安装Git工具后, 需要配置用户信息, 否则不能`git commit`<br>
 `git config --global user.name "kevin"`<br>
 `git config --global user.email "kevin@example.com"`<br>
 由于添加了`--global`选项, 那么在每次Git提交的时候都会读取该信息, 如果想针对某个项目使用不同的用户信息, 去掉`--global`选项<br>
 注意, 此信息并不是密码类的信息, 意味着可以配置任意信息<br>
+`git config -l`查看自己配置的用户名和邮箱<br>
 
 3. 修改`git commit`默认编辑器为`vim`<br>
 `git config --global core.editor vim`<br>
@@ -71,8 +74,12 @@
 `git push origin --delete dev`<br>
 
 8. 合并本地分支<br>
-`git merge dev`
+`git merge dev`<br>
 先进入另一个分支, 如`master`分支, 然后合并`dev`分支到`master`分支<br>
+
+9. 新建标签并提交<br>
+`git tag -a tag_name -m "info about this tag"` 给某个分支打上标签<br>
+`git push origin tag_name` 提交`tag` <br>
 
 ### 拉取远程新分支
 1. 查看本地仓库是否与远程仓库建立连接<br>
@@ -154,6 +161,15 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 2. `git show commit_id` 根据`git log`显示的`commit_id`来查看某次提交详细的记录, 类似`git log -p`<br>
 `git show commit_id --stat` 仅显示统计信息<br>
 
+3. `git diff origin/dev dev` 比较`origin-dev`仓库和本地`dev`仓库的区别
+`git diff` 不带任何参数时, 默认列出工作区和暂存区的区别<br>
+`git diff HEAD` 比较`origin`区和暂存区的区别<br>
+`git diff --name-only` 只列出变更文件名<br>
+`git diff --name-status` 列出变更文件状态(添加, 修改, 删除等)<br>
+
+关于`diff`和工作区等的讨论见:<br>
+https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
+
 ### 其他
 1. 本地仓库里会有一个隐藏的`.git`文件夹，里面记录了远程仓库的相关信息(包括`branch`的信息)
 
@@ -165,24 +181,9 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 
 4. `git status` 查看当前状态
 
-5. `git diff origin/dev dev` 比较`origin-dev`仓库和本地`dev`仓库的区别
-`git diff` 不带任何参数时, 默认列出工作区和暂存区的区别<br>
-`git diff HEAD` 比较`origin`区和暂存区的区别<br>
-`git diff --name-only` 只列出变更文件名<br>
-`git diff --name-status` 列出变更文件状态(添加, 修改, 删除等)<br>
-
-关于`diff`和工作区等的讨论见:<br>
-https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
-
-6. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息<br>
+5. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息<br>
 因此我们需要删除`.vscode`在工作区的缓存, 键入`git rm -r --cached dir`即可<br>
 更好的方式是在项目创建的时候将`.vscode`添加到`.gitignore`中<br>
-
-7. `git config -l`查看自己配置的用户名和邮箱
-
-8. `git tag -a tag_name -m "info about this tag"`  给某个分支打上标签
-
-9. `git push origin tag_name` 提交`tag` 
 
 ><br>
 https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424<br>
