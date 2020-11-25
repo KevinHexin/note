@@ -1,21 +1,23 @@
 ### 初始化
 1. 生成`ssh-key`<br>
 `ssh-keygen -t rsa -C "your_remarks"`<br>
-运行上述命令会确认密钥的存储位置, 默认情况下, `linux`系统ssh密钥在`~/.ssh`目录下<br>
-查看`ssh`公钥, 添加到Git远程服务器上<br>
-`cat ~/.ssh/id_rsa.pub`<br>
 `-t`选项指定了加密方式, 默认为`rsa`加密, 所以此项可选<br>
 `-C`选项指定了此key的标识, 可选<br>
 
-2. 在安装Git工具后, 需要配置用户信息, 否则不能`git commit`<br>
+2. 添加`ssh-key`到`git`服务器<br>
+默认情况下, `linux`系统ssh密钥生成在`~/.ssh`目录下<br>
+`cat ~/.ssh/id_rsa.pub` 查看`ssh`公钥, 添加到Git远程服务器上<br>
+
+3. 在安装Git工具后, 需要配置用户信息, 否则不能`git commit`<br>
 `git config --global user.name "kevin"`<br>
 `git config --global user.email "kevin@example.com"`<br>
 由于添加了`--global`选项, 那么在每次Git提交的时候都会读取该信息, 如果想针对某个项目使用不同的用户信息, 去掉`--global`选项<br>
 注意, 此信息并不是密码类的信息, 意味着可以配置任意信息<br>
-`git config -l`查看自己配置的用户名和邮箱<br>
 
-3. 修改`git commit`默认编辑器为`vim`<br>
+4. 修改`git commit`默认编辑器为`vim`<br>
 `git config --global core.editor vim`<br>
+
+5. `git config -l`查看自己的配置信息<br>
 
 ### 初始化关联一个远程仓库
 关联远程仓库的信息记录到`.git`隐藏目录下<br>
