@@ -17,13 +17,16 @@
 ### 初始化关联一个远程仓库
 关联远程仓库的信息记录到`.git`隐藏目录下<br>
 1. 在远程仓库(如`GitHub/GitLab`)新建一个工程<br>
+
 2. 选择下载远程仓库到本地<br>
 `git clone git@xx.xx.xx.xx:kevin/project.git`<br>
 此时, 本地的`project`文件夹就关联到了远程仓库<br>
+
 3. 针对第2步, 也可以在本地新建一个工程, 然后<br>
 `git init`<br>
 `git remote add origin git@xx.xx.xx.xx:kevin/project.git`<br>
 此时, 本地的`project`文件夹就关联到了远程仓库<br>
+
 4. 如果本地文件夹已经关联到了另一个远程仓库<br>
 `git remote rename origin old-origin`<br>
 `git remote add origin git@xx.xx.xx.xx:kevin/project.git`<br>
@@ -32,9 +35,11 @@
 ### 提交本地代码
 1. 将本目录以及下级目录所有文件添加到暂存区<br>
 `git add .`<br>
+
 2. 记录本次提交相对于上次提交文件的更改<br>
 `git commit -m "info"`<br>
 `-m` 添加本次提交的注释(必须添加注释)<br>
+
 3. 提交, 如果远程仓库没有`dev`分支, 则在远程仓库新建一个`dev`分支<br>
 `git push origin dev`<br>
 远程仓库名为`origin`<br>
@@ -84,6 +89,31 @@
 
 4. 新建本地分支并切换到远程分支<br>
 `git checkout -b dev origin/dev`<br>
+
+### submodules
+1. 引用一个远程仓库<br>
+`git submodule add git_addr`<br>
+这时在项目目录下会添加一个`.submodules`的文件, 里面记录了一些引用仓库的信息
+
+2. 切换引用仓库分支<br>
+`cd your_submodule` && `git checkout -b dev origin/dev`<br>
+即进入到引用仓库目录, 进行正常的分支切换就可以了<br>
+未切换分支时进入引用仓库键入`git branch`看到的是一个`commit id`, 即初始时分支会`checkout`到`HEAD`的`commit id`上<br>
+
+3. `clone`一个带有引用分支的仓库<br>
+`git clone git_addr` 即常规`clone`后, 项目目录下只会存在一个引用仓库的空目录, 里面为空<br>
+需要使用`git clone git_addr --recursive`即加上`--recursive`参数即可下载引用仓库<br>
+或则`git submodule init` && `git submodule update` 即可下载引用仓库<br>
+
+4. 引用仓库的更新<br>
+如果引用仓库所属的远程仓库发生了更新, 想要同步更新到本地, 只需要进入到引用仓库目录, <br>
+并进行正常的git仓库更新步骤(`pull or fetch&&merge`)即可<br>
+
+4. 修改并提交对引用仓库的更改<br>
+如果对引用仓库进行了修改, 并想要上传修改, 只需要进入到引用仓库内,<br>
+并进行正常的`git add .` && `git commit` && `git push`操作即可, 更新将上传到引用的远程仓库中.<br>
+提交引用仓库后, 在主仓库`git status`将显示引用仓库的`subproject commit id`发生了更改, 这时需要在主仓库再次提交一次更改.<br>
+
 
 ### 协作开发(合并远程仓库的代码到本地)
 1. 直接合并远程分支代码到本地(`不推荐的做法`)<br>
@@ -137,13 +167,14 @@ https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%8
 
 5. `git diff origin/dev dev` 比较`origin-dev`仓库和本地`dev`仓库的区别
 `git diff` 不带任何参数时, 默认列出工作区和暂存区的区别<br>
+`git diff HEAD` 比较`origin`区和暂存区的区别<br>
 `git diff --name-only` 只列出变更文件名<br>
 `git diff --name-status` 列出变更文件状态(添加, 修改, 删除等)<br>
 
 关于`diff`和工作区等的讨论见:<br>
 https://www.liaoxuefeng.com/wiki/896043488029600/897271968352576<br>
 
-6. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息
+6. 当`gitignore`不起作用时, 一般是因为`vscode`为我们自动记录了文件更改信息<br>
 因此我们需要删除`.vscode`在工作区的缓存, 键入`git rm -r --cached dir`即可<br>
 更好的方式是在项目创建的时候将`.vscode`添加到`.gitignore`中<br>
 
