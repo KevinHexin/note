@@ -122,6 +122,10 @@ set scrolloff=5
 " 与系统共享剪切板
 set clipboard=unnamed
 
+" 解决退格键无效的问题
+set backspace=2
+set backspace=indent,eol,start
+
 " 在insert模式下按crtl+h/j/k/l移动光标
 inoremap <c-h> <left>
 inoremap <c-j> <down>
