@@ -119,6 +119,9 @@ set mouse=
 " 在屏幕前后预留5行
 set scrolloff=5
 
+" 与系统共享剪切板
+set clipboard=unnamed
+
 " 在insert模式下按crtl+h/j/k/l移动光标
 inoremap <c-h> <left>
 inoremap <c-j> <down>
